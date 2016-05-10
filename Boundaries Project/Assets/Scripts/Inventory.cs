@@ -9,10 +9,16 @@ public class Inventory : MonoBehaviour
     /// </summary>
     [SerializeField]
     List<Item> inventory = new List<Item>();
+    CheckPoint save;
     
+    void Start()
+    {
+        save = GetComponent<CheckPoint>();
+    }
 
     public void AddItem(Item i)
     {
         inventory.Add(i);
+        save.SaveCheckPoint(transform.position);
     }
 }
