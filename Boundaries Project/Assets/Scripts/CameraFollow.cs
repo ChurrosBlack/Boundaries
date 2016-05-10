@@ -42,7 +42,7 @@ public class CameraFollow : MonoBehaviour
         }
 
         midTarget = new Vector2((targets[0].position.x + targets[1].position.x)/2, (targets[0].position.y + targets[1].position.y)/2);
-        print(Vector2.Distance(targets[0].position, targets[1].position));
+
 
 
         transform.position = new Vector3(Mathf.Lerp(transform.position.x, midTarget.x + (xTarget * side) , delay),

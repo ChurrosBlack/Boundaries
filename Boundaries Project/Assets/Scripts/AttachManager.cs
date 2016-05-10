@@ -5,15 +5,18 @@ public class AttachManager : MonoBehaviour
 {
     [SerializeField]
     HingeJoint2D boyJoint; 
-    [SerializeField]
-    KeyCode keyCode = KeyCode.Q;
-    float distanceAbleToAttach;
+    
+    public KeyCode keyCode = KeyCode.Q;
+    //float distanceAbleToAttach;
     [SerializeField]
     Transform boy;
     [SerializeField]
     Transform girl;
     PlayerController boyController;
     PlayerController girlController;
+
+
+    public bool ableTo; //Caso ela esteja perto de um item ela não deve soltar a mão do rapaz
 
     void Start()
     {
@@ -23,11 +26,13 @@ public class AttachManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(keyCode))
+        
+        if (Input.GetKeyDown(keyCode) && ableTo)
         {
             boyJoint.enabled = !boyJoint.enabled;
         }
 
+        //Intercala os controles de cada personagem
         boyController.enabled = !boyJoint.enabled;
         girlController.enabled = boyJoint.enabled;
     }

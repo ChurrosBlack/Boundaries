@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5;
     public Direction dir;
+    public KeyCode pauseButton;
     Rigidbody2D rb;
 
     void Start()
@@ -28,15 +29,7 @@ public class PlayerController : MonoBehaviour
             dir = Direction.LEFT;
         }
 
-    }
-
-
-    /// <summary>
-    /// Não é necessário caso ocorra rotação de sprite já que o objeto que dispara os tiros possui
-    /// rotação própria
-    /// </summary>
-    /// 
-   
+    }  
 
     public enum Direction
     {
