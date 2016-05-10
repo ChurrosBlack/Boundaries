@@ -3,10 +3,13 @@ using System.Collections;
 
 public class Item : MonoBehaviour
 {
+    /// <summary>
+    /// Script de comportamento do Item
+    /// </summary>
     public int id;
     [SerializeField]
     string name;
-    AttachManager attachManager;
+    AttachManager attachManager; //Necessita ter referência à este componente poiso botão de interação é o mesmo
     bool girlClose;
     Inventory inventory;
 

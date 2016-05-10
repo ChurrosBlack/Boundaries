@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 public class BoySense : MonoBehaviour
 {
+    /// <summary>
+    /// Responsável pelo poder do garoto em sentir a proximidade dos itens
+    /// Funciona pegando todas as posições de todos os itens e checando constante deles qual deles
+    /// Após descobrir qual está mais perto uma variável de distância checará a proximidade exata do item
+    /// </summary>
+    
     GameObject[] Items;
     float distance;
     SenseStages senseStages;

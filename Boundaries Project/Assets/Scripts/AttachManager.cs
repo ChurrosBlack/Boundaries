@@ -3,11 +3,15 @@ using System.Collections;
 
 public class AttachManager : MonoBehaviour
 {
+    /// <summary>
+    /// Responsável pelo mecanismo de soltar/agarrar o garoto, o script deve permanecer em um terceiro objeto invisível ao jogador
+    /// </summary>
+    /// 
     [SerializeField]
     HingeJoint2D boyJoint; 
     
     public KeyCode keyCode = KeyCode.Q;
-    //float distanceAbleToAttach;
+    //float distanceAbleToAttach; Settar distância minima para ocorrer o evento
     [SerializeField]
     Transform boy;
     [SerializeField]
