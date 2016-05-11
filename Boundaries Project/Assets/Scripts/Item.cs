@@ -31,7 +31,6 @@ public class Item : MonoBehaviour
                 inventory.AddItem(this);
                 this.gameObject.SetActive(false);
                 attachManager.ableTo = true;
-                
             }
             catch (System.Exception)
             {
