@@ -8,8 +8,9 @@ public class AttachManager : MonoBehaviour
     /// </summary>
     /// 
     [SerializeField]
-    HingeJoint2D boyJoint; 
-    
+
+    public HingeJoint2D boyJoint;
+
     public KeyCode keyCode = KeyCode.Q;
     //float distanceAbleToAttach; Settar distância minima para ocorrer o evento
     [SerializeField]
@@ -18,6 +19,10 @@ public class AttachManager : MonoBehaviour
     Transform girl;
     PlayerController boyController;
     PlayerController girlController;
+    public Rigidbody2D bodyToConnect;
+    [SerializeField]
+    float minDist = 1f;
+
 
 
     public bool ableTo; //Caso ela esteja perto de um item ela não deve soltar a mão do rapaz
@@ -26,14 +31,17 @@ public class AttachManager : MonoBehaviour
     {
         boyController = boy.gameObject.GetComponent<PlayerController>();
         girlController = girl.gameObject.GetComponent<PlayerController>();
+
     }
 
     void Update()
     {
-        
+
+
+
         if (Input.GetKeyDown(keyCode) && ableTo)
         {
-            boyJoint.enabled = !boyJoint.enabled;
+            Attach();
         }
 
         //Intercala os controles de cada personagem
@@ -41,5 +49,14 @@ public class AttachManager : MonoBehaviour
         girlController.enabled = boyJoint.enabled;
     }
 
-    
+    void Attach()
+    {
+        if (bodyToConnect == null)
+        {
+            return;
+        }
+
+        boyJoint.connectedBody = bodyToConnect;
+        boyJoint.enabled = !boyJoint.enabled;
+    }
 }
