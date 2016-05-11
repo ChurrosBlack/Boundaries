@@ -8,7 +8,7 @@ public class AttachManager : MonoBehaviour
     /// </summary>
     /// 
     [SerializeField]
-    HingeJoint2D boyJoint; 
+    public HingeJoint2D boyJoint; 
     
     public KeyCode keyCode = KeyCode.Q;
     //float distanceAbleToAttach; Settar distância minima para ocorrer o evento

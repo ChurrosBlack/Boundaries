@@ -31,6 +31,17 @@ public class PlayerController : MonoBehaviour
 
     }  
 
+    public void MoveRight()
+    {
+        transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
+            dir = Direction.RIGHT;
+    }
+
+    public void MoveLeft()
+    {
+         transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
+            dir = Direction.LEFT;
+    }
     public enum Direction
     {
         RIGHT,
