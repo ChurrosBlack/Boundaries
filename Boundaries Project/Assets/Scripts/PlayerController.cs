@@ -19,29 +19,29 @@ public class PlayerController : MonoBehaviour
 
         if (input > 0)
         {
-            transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
-            dir = Direction.RIGHT;
+            MoveRight();
         }
 
         if (input < 0)
         {
-            transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
-            dir = Direction.LEFT;
+            MoveLeft();
         }
 
-    }  
+
+    } 
 
     public void MoveRight()
     {
         transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
-            dir = Direction.RIGHT;
+        dir = Direction.RIGHT;
     }
 
     public void MoveLeft()
     {
-         transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
-            dir = Direction.LEFT;
+        transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
+        dir = Direction.LEFT;
     }
+
     public enum Direction
     {
         RIGHT,

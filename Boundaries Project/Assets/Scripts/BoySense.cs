@@ -8,7 +8,7 @@ public class BoySense : MonoBehaviour
     /// Funciona pegando todas as posições de todos os itens e checando constante deles qual deles
     /// Após descobrir qual está mais perto uma variável de distância checará a proximidade exata do item
     /// </summary>
-
+    
     GameObject[] Items;
     float distance;
     SenseStages senseStages;
@@ -23,11 +23,11 @@ public class BoySense : MonoBehaviour
     void Update()
     {
         distance = Vector2.Distance(transform.position, ClosestItem());
-        print("Posição do item mais próximo do garoto: "+ ClosestItem());
         //TODO: Especificar quais distâncias serão trocados os estágios do sentido do rapaz;
         if (distance > farDist) senseStages = SenseStages.FAR;
         if (distance <= farDist) senseStages = SenseStages.MID;
         if (distance <= closeDist) senseStages = SenseStages.CLOSE;
+
 
         switch (senseStages)
         {
