@@ -70,6 +70,7 @@ public class GirlFollow : MonoBehaviour
             if (Mathf.Abs(transform.position.x - boyTransform.position.x) <= deviation)
             {
                 return;
+
             }
 
             if (boyTransform.position.x > transform.position.x && !blockMoveTowards)
