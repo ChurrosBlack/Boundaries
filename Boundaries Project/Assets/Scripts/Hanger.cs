@@ -3,36 +3,45 @@ using System.Collections;
 
 public class Hanger : MonoBehaviour
 {
+    /// <summary>
+    /// Deve conter um CircleCollider2D Trigger mostrando a área que pode ser Attachable!
+    /// E para o método OnTriggerStay2D funcionar né :D
+    /// </summary>
     AttachManager attachManager;
     float distance;
     Transform boy;
+    public bool attached;
 
     void Start()
     {
         attachManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<AttachManager>();
         boy = GameObject.FindGameObjectWithTag("Boy").GetComponent<Transform>();
+        this.GetComponent<CircleCollider2D>().isTrigger = true;
     }
 
     void Update()
     {
-        distance = Vector2.Distance(boy.transform.position, transform.position);
-
-        if(distance <= attachManager.minDistToAttach)
+        if (attachManager.boyJoint.enabled && attachManager.bodyToConnect == this.GetComponent<Rigidbody2D>())
         {
-            //Dentro da distância mínima
-            print("Detec Enter PRESS Q TO ATTACH!!");
+            attached = true;
+        }
+
+        if (attached)
+        {
+            attachManager.ableTo = true;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.tag == "Boy")
+        {
+            print("Detec Enter PRESS Q TO ATTACH!!" + gameObject.name);
             attachManager.ableTo = true;
             attachManager.bodyToConnect = this.GetComponent<Rigidbody2D>();
         }
-        else
-        {
-            print("Detec Exit");
-            attachManager.ableTo = false;
-            attachManager.bodyToConnect = null;
-        }
-
-
-
     }
+
+
 
 }
