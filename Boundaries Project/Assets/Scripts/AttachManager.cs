@@ -21,8 +21,7 @@ public class AttachManager : MonoBehaviour
     PlayerController girlController;
     public Rigidbody2D bodyToConnect;
     [SerializeField]
-    float minDist = 1f;
-
+    public float minDistToAttach = 4f;
 
 
     public bool ableTo; //Caso ela esteja perto de um item ela não deve soltar a mão do rapaz
@@ -37,7 +36,7 @@ public class AttachManager : MonoBehaviour
     void Update()
     {
 
-
+        
 
         if (Input.GetKeyDown(keyCode) && ableTo)
         {

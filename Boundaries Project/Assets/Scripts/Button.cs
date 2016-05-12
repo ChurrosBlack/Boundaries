@@ -1,31 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Item : MonoBehaviour
+public class Button : MonoBehaviour
 {
     /// <summary>
-    /// Script de comportamento do Item
+    /// Script de comportamento de botão
+    /// Pode ser usado também para alavancas, etc
     /// </summary>
-    public int id;
     [SerializeField]
     string name;
     AttachManager attachManager; //Necessita ter referência à este componente poiso botão de interação é o mesmo
     bool girlClose;
-    Inventory inventory;
+    [SerializeField]
+    bool activated = false;
 
     void Start()
     {
         attachManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<AttachManager>();
-        try
-        {
-            inventory = GameObject.FindGameObjectWithTag("Girl").gameObject.GetComponent<Inventory>();
 
-        }
-        catch (System.Exception)
-        {
-            print("Girl not found by:" + this);
-            throw;
-        }
     }
 
     void Update()
@@ -36,8 +28,7 @@ public class Item : MonoBehaviour
             try
             {
                 print("uhu");
-                inventory.AddItem(this);
-                this.gameObject.SetActive(false);
+                activated = !activated;
                 attachManager.ableTo = true;
             }
             catch (System.Exception)
@@ -69,3 +60,4 @@ public class Item : MonoBehaviour
 
 
 }
+
