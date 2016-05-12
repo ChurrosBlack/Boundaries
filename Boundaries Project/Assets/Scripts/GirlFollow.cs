@@ -7,6 +7,9 @@ public class GirlFollow : MonoBehaviour
     /// Script responsável pelo mecanismo de seguir a garoto quando ele estiver solto
     /// E também parar de andar caso exista algo à sua frente
     /// </summary>
+    /// 
+
+    public bool active;
     Transform boyTransform;
     PlayerController girlController;
     AttachManager attachManager;
@@ -14,8 +17,11 @@ public class GirlFollow : MonoBehaviour
     public float deviation = 2f; //desvio
     public float sightDistance = 3f;
     public LayerMask threatLayer;
+    [SerializeField]
+    bool blockMoveTowards; //Bloquear movimento em certa direção
+    [SerializeField]
+    bool blockMoveBackwards;
 
-    bool active;
     void Start()
     {
         girlController = GetComponent<PlayerController>();
@@ -39,29 +45,45 @@ public class GirlFollow : MonoBehaviour
         }
         else
         {
-            active = !ThreatOnSight(girlController.dir);
+            active = true;
         }
 
         
         if (active)
         {
+            switch (girlController.dir)
+            {
+                case PlayerController.Direction.RIGHT:
+                    blockMoveTowards = ThreatOnSight(girlController.dir);
+                    blockMoveBackwards = false;
+                    break;
+                case PlayerController.Direction.LEFT:
+                    blockMoveBackwards = ThreatOnSight(girlController.dir);
+                    blockMoveTowards = false;
+                    break;
+                default:
+                    break;
+            }
+
+
             //Caso esteja perto do rapaz
             if (Mathf.Abs(transform.position.x - boyTransform.position.x) <= deviation)
             {
                 return;
             }
 
-            if (boyTransform.position.x > transform.position.x)
+            if (boyTransform.position.x > transform.position.x && !blockMoveTowards)
             {
                 girlController.MoveRight();
             }
             else
             {
-                if (boyTransform.position.x < transform.position.x)
+                if (boyTransform.position.x < transform.position.x && !blockMoveBackwards)
                 {
                     girlController.MoveLeft();
                 }
             }
+
 
         }
     }
