@@ -23,23 +23,21 @@ public class AttachManager : MonoBehaviour
     [SerializeField]
     public float minDistToAttach = 4f;
 
-
     public bool ableTo; //Caso ela esteja perto de um item ela não deve soltar a mão do rapaz
 
     void Start()
     {
         boyController = boy.gameObject.GetComponent<PlayerController>();
         girlController = girl.gameObject.GetComponent<PlayerController>();
-
     }
 
     void Update()
     {
-
         
 
         if (Input.GetKeyDown(keyCode) && ableTo)
         {
+            print("Input Detected");
             Attach();
         }
 
@@ -50,12 +48,11 @@ public class AttachManager : MonoBehaviour
 
     void Attach()
     {
-        if (bodyToConnect == null)
-        {
-            return;
-        }
+      
 
         boyJoint.connectedBody = bodyToConnect;
         boyJoint.enabled = !boyJoint.enabled;
     }
+
+    
 }
