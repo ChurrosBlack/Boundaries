@@ -8,6 +8,8 @@ public class GirlFollow : MonoBehaviour
     AttachManager attachManager;
     public Rigidbody2D rb;
     public float deviation = 2f; //desvio
+    public float sightDistance;
+    public string threatTag;
 
     bool active;
     void Start()
@@ -33,7 +35,7 @@ public class GirlFollow : MonoBehaviour
         }
         else
         {
-            active = true;
+            active = ThreatOnSight();
         }
 
         if (active)
@@ -47,17 +49,26 @@ public class GirlFollow : MonoBehaviour
             if (boyTransform.position.x > transform.position.x)
             {
                 girlController.MoveRight();
-                print("Moving Right:" + transform.position.x);
+
             }
             else
             {
                 if (boyTransform.position.x < transform.position.x)
                 {
                     girlController.MoveLeft();
-                    print("Moving Left" + transform.position.x);
                 }
             }
 
         }
+    }
+
+    bool ThreatOnSight()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, sightDistance);
+        if (hit.collider.tag == threatTag)
+        {
+            return false;
+        }
+        return true;
     }
 }
