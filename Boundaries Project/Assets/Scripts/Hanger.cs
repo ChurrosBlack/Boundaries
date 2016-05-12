@@ -16,7 +16,7 @@ public class Hanger : MonoBehaviour
     void Update()
     {
         distance = Vector2.Distance(boy.transform.position, transform.position);
-        print(distance);
+
         if(distance <= attachManager.minDistToAttach)
         {
             //Dentro da distância mínima
