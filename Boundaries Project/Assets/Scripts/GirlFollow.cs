@@ -3,13 +3,17 @@ using System.Collections;
 
 public class GirlFollow : MonoBehaviour
 {
+    /// <summary>
+    /// Script responsável pelo mecanismo de seguir a garoto quando ele estiver solto
+    /// E também parar de andar caso exista algo à sua frente
+    /// </summary>
     Transform boyTransform;
     PlayerController girlController;
     AttachManager attachManager;
     public Rigidbody2D rb;
     public float deviation = 2f; //desvio
-    public float sightDistance;
-    public string threatTag;
+    public float sightDistance = 3f;
+    public LayerMask threatLayer;
 
     bool active;
     void Start()
@@ -35,21 +39,21 @@ public class GirlFollow : MonoBehaviour
         }
         else
         {
-            active = ThreatOnSight();
+            active = !ThreatOnSight(girlController.dir);
         }
 
+        
         if (active)
         {
+            //Caso esteja perto do rapaz
             if (Mathf.Abs(transform.position.x - boyTransform.position.x) <= deviation)
             {
-                print("Pare...pegue no bum bum");
                 return;
             }
 
             if (boyTransform.position.x > transform.position.x)
             {
                 girlController.MoveRight();
-
             }
             else
             {
@@ -62,13 +66,20 @@ public class GirlFollow : MonoBehaviour
         }
     }
 
-    bool ThreatOnSight()
+    bool ThreatOnSight(PlayerController.Direction dir)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, sightDistance);
-        if (hit.collider.tag == threatTag)
+        Vector2 direction = new Vector2();
+        if (dir == PlayerController.Direction.RIGHT) direction = transform.right;
+        else direction = transform.right * -1;
+        
+        Debug.DrawRay(transform.position, direction * sightDistance, Color.red);
+        if (Physics2D.Raycast(transform.position, direction, sightDistance, threatLayer))
         {
-            return false;
+            print("Cant go bro, look at that drop right there nigguh");
+            return true;
         }
-        return true;
+        return false;
     }
+
+  
 }
