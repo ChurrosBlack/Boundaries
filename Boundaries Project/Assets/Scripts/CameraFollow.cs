@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
     public int targetIndex; //Caso estejam soltos um do outro a câmera precisa levar em consideração o alvo que está sendo controlado, no caso, o garoto
 
     Camera cam;
-    float minOrthosize = 4.52f; 
+    float defaultOrthoSize = 4.52f; 
 
     PlayerController[] player = new PlayerController[2];
     int side; //Variável para controle de que lado o jogador está olhando, podendo ser 1 ou -1 (Direita ou esquerda)
@@ -59,7 +59,7 @@ public class CameraFollow : MonoBehaviour
     void AdjustCameraSize()
     {
         cam.orthographicSize = Vector2.Distance(targets[0].position, targets[1].position)/2;
-        if (cam.orthographicSize <= minOrthosize) cam.orthographicSize = minOrthosize;
+        if (cam.orthographicSize <= defaultOrthoSize) cam.orthographicSize = defaultOrthoSize;
 
     }
 }
