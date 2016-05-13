@@ -4,7 +4,7 @@ using System.Collections;
 public class GameOverManager : MonoBehaviour
 {
     /// <summary>
-    /// Esse aqui vai no Manager da cena
+    /// Anexar ao manager da cena
     /// </summary>
     public bool boyDead= false;
     public bool girlDead = false;
