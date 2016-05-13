@@ -7,13 +7,12 @@ public class Button : MonoBehaviour
     /// Script de comportamento de botão
     /// Pode ser usado também para alavancas, etc
     /// </summary>
-    [SerializeField]
-    string name;
+   
     AttachManager attachManager; //Necessita ter referência à este componente poiso botão de interação é o mesmo
     bool girlClose;
     [SerializeField]
     bool activated = false;
-    GameObject doorAttachedTo; //Porta ou barreira atrelado ao botão para ser ativado
+    Transform[] objAttachedTo; //Porta ou barreira atrelado ao botão para ser ativado
 
     void Start()
     {
@@ -30,7 +29,6 @@ public class Button : MonoBehaviour
             {
                 print("uhu");
                 activated = !activated;
-                attachManager.ableTo = true;
             }
             catch (System.Exception)
             {
@@ -43,22 +41,38 @@ public class Button : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
 
-        if (col.tag == "Girl")
+        if (col.tag == "Boy")
         {
             attachManager.ableTo = false;
             girlClose = true;
+        }
+
+        if (col.tag == "Girl")
+        {
+            activated = true;
         }
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
+        if (col.tag == "Boy")
+        {
+            girlClose = false;
+            attachManager.ableTo = true;
+        }
+
         if (col.tag == "Girl")
         {
-            attachManager.ableTo = true;
-            girlClose = false;
+            activated = true;
         }
     }
 
-
+    //void ActivateObjectsAttached()
+    //{
+    //    for (int i = 0; i < objAttachedTo.Length; i++)
+    //    {
+    //        objAttachedTo[i].GetComponent<Barrier>().open = true;
+    //    }
+    //}
 }
 

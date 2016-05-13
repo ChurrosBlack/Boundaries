@@ -10,62 +10,36 @@ public class Item : MonoBehaviour
     [SerializeField]
     string name;
     AttachManager attachManager; //Necessita ter referência à este componente poiso botão de interação é o mesmo
-    bool girlClose;
     Inventory inventory;
 
     void Start()
     {
-        attachManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<AttachManager>();
         try
         {
-            inventory = GameObject.FindGameObjectWithTag("Girl").gameObject.GetComponent<Inventory>();
+            attachManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<AttachManager>();
+            inventory = GameObject.FindGameObjectWithTag("Manager").gameObject.GetComponent<Inventory>();
 
         }
         catch (System.Exception)
         {
-            print("Girl not found by:" + this);
+            print("Manager not found by:" + this);
             throw;
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q) && girlClose)
-        {
-            print("detected");
-            try
-            {
-                print("uhu");
-                inventory.AddItem(this);
-                this.gameObject.SetActive(false);
-                attachManager.ableTo = true;
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
-        }
-    }
+   
 
     void OnTriggerEnter2D(Collider2D col)
     {
 
-        if (col.tag == "Girl")
+        if (col.tag == "Girl" || col.tag == "Boy")
         {
-            attachManager.ableTo = false;
-            girlClose = true;
+            inventory.AddItem(this);
+            this.gameObject.SetActive(false);
         }
     }
 
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.tag == "Girl")
-        {
-            attachManager.ableTo = true;
-            girlClose = false;
-        }
-    }
+   
 
 
 }

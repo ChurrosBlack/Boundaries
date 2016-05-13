@@ -10,7 +10,6 @@ public class Hanger : MonoBehaviour
     AttachManager attachManager;
     float distance;
     Transform boy;
-    public bool attached;
 
     void Start()
     {
@@ -21,15 +20,15 @@ public class Hanger : MonoBehaviour
 
     void Update()
     {
-        if (attachManager.boyJoint.enabled && attachManager.bodyToConnect == this.GetComponent<Rigidbody2D>())
-        {
-            attached = true;
-        }
+        //if (attachManager.boyJoint.enabled && attachManager.bodyToConnect == this.GetComponent<Rigidbody2D>())
+        //{
+        //    attached = true;
+        //}
 
-        if (attached)
-        {
-            attachManager.ableTo = true;
-        }
+        //if (attached)
+        //{
+        //    attachManager.ableTo = true;
+        //}
     }
 
     void OnTriggerStay2D(Collider2D col)
@@ -42,6 +41,15 @@ public class Hanger : MonoBehaviour
         }
     }
 
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == "Boy")
+        {
+            print("Exited");
+            attachManager.ableTo = false;
+            attachManager.bodyToConnect = null;
+        }
+    }
 
 
 }

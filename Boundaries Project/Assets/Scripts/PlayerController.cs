@@ -8,6 +8,12 @@ public class PlayerController : MonoBehaviour
     public KeyCode pauseButton;
     Rigidbody2D rb;
 
+
+    /// <summary>
+    /// Componente responsável pelos controles, tanto o garoto quanto a menina levam o componente
+    /// No garoto este script deve estar desativado quando estiver anexado à algo
+    /// </summary>
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
