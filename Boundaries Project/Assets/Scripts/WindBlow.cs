@@ -33,14 +33,12 @@ public class WindBlow : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D col)
     {
-        print("Assoprando vuoooosh");
         col.gameObject.GetComponent<Rigidbody2D>().AddForce(force * windForce);
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        col.gameObject.GetComponent<Rigidbody2D>().Sleep();
-        col.gameObject.GetComponent<Rigidbody2D>().WakeUp();
+        col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
     }
 

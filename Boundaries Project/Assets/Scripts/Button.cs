@@ -13,6 +13,7 @@ public class Button : MonoBehaviour
     bool girlClose;
     [SerializeField]
     bool activated = false;
+    GameObject doorAttachedTo; //Porta ou barreira atrelado ao botão para ser ativado
 
     void Start()
     {
