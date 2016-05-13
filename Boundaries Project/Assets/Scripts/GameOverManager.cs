@@ -26,7 +26,17 @@ public class GameOverManager : MonoBehaviour
         }
     }
 
-    
+    void TryAgain()
+    {
+        if (checkPoint.together)
+        {
+            checkPoint.ReturnToCheckPointTogether();
+        }
+        else
+        {
+            checkPoint.ReturnToCheckPointSeparated();
+        }
+    }
 
     //Bom para fazer uma animação de morte antes retornar ao CheckPoint
     public IEnumerator WaitAnim(float time)
@@ -36,6 +46,6 @@ public class GameOverManager : MonoBehaviour
         print("Waited");
         boyDead = false;
         girlDead = false;
-        checkPoint.ReturnToCheckPoint();
+        TryAgain();
     }
 }

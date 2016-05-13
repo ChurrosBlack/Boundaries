@@ -24,6 +24,8 @@ public class AttachManager : MonoBehaviour
     public float minDistToAttach = 4f;
 
     public bool ableTo; //Caso ela esteja perto de um item ela não deve soltar a mão do rapaz
+    public bool attached;
+
 
     void Start()
     {
@@ -33,9 +35,13 @@ public class AttachManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(keyCode) && attached)
+        {
+            Detach();
+        }
 
-        if (Input.GetKeyDown(keyCode) && ableTo)
+
+        if (Input.GetKeyDown(keyCode) && ableTo && !attached)
         {
             print("Input Detected");
             Attach();
@@ -47,12 +53,21 @@ public class AttachManager : MonoBehaviour
     }
 
     void Attach()
-    {
-      
-
+    {     
         boyJoint.connectedBody = bodyToConnect;
-        boyJoint.enabled = !boyJoint.enabled;
+        boyJoint.enabled = true;
+        attached = true;
     }
 
-    
+    void Detach()
+    {
+        if (!boyJoint.enabled)
+        {
+            return;
+        }
+
+        boyJoint.connectedBody = null;
+        boyJoint.enabled = false;
+        attached = false;
+    }
 }
