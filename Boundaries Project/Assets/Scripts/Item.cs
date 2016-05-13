@@ -10,7 +10,6 @@ public class Item : MonoBehaviour
     [SerializeField]
     string name;
     AttachManager attachManager; //Necessita ter referência à este componente poiso botão de interação é o mesmo
-    bool playerClose;
     Inventory inventory;
 
     void Start()
@@ -28,44 +27,19 @@ public class Item : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q) && playerClose)
-        {
-            print("detected");
-            try
-            {
-                print("uhu");
-                inventory.AddItem(this);
-                this.gameObject.SetActive(false);
-                //attachManager.ableTo = true;
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
-        }
-    }
+   
 
     void OnTriggerEnter2D(Collider2D col)
     {
 
         if (col.tag == "Girl" || col.tag == "Boy")
         {
-            attachManager.ableTo = false;
-            playerClose = true;
+            inventory.AddItem(this);
+            this.gameObject.SetActive(false);
         }
     }
 
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.tag == "Girl" || col.tag == "Boy")
-        {
-            //attachManager.ableTo = true;
-            playerClose = false;
-        }
-    }
+   
 
 
 }

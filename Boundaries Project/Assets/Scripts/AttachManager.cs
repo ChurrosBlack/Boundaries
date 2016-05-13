@@ -23,7 +23,7 @@ public class AttachManager : MonoBehaviour
     [SerializeField]
     public float minDistToAttach = 4f;
 
-    public bool ableTo; //Caso ela esteja perto de um item ela não deve soltar a mão do rapaz
+    public bool ableTo = true; //Caso ela esteja perto de um item ela não deve soltar a mão do rapaz
     public bool attached;
 
 
@@ -40,6 +40,10 @@ public class AttachManager : MonoBehaviour
             Detach();
         }
 
+        if (!ableTo)
+        {
+            return;
+        }
 
         if (Input.GetKeyDown(keyCode) && ableTo && !attached)
         {
