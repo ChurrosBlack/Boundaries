@@ -9,7 +9,7 @@ public class Button : MonoBehaviour
     /// </summary>
    
     AttachManager attachManager; //Necessita ter referência à este componente poiso botão de interação é o mesmo
-    bool girlClose;
+    bool boyClose;
     [SerializeField]
     bool activated = false;
     Transform[] objAttachedTo; //Porta ou barreira atrelado ao botão para ser ativado
@@ -22,13 +22,13 @@ public class Button : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && girlClose)
+        if (Input.GetKeyDown(KeyCode.Q) && boyClose && !activated)
         {
             print("detected");
             try
             {
-                print("uhu");
-                activated = !activated;
+                print("Button" + gameObject.name + " :" +activated);
+                activated = true;
             }
             catch (System.Exception)
             {
@@ -46,34 +46,29 @@ public class Button : MonoBehaviour
         }
     }
 
-    //void OnTriggerEnter2D(Collider2D col)
-    //{
+    void OnTriggerEnter2D(Collider2D col)
+    {
 
-    //    if (col.tag == "Boy")
-    //    {
-    //        attachManager.ableTo = false;
-    //        girlClose = true;
-    //    }
+        if (col.tag == "Boy")
+        {
+            boyClose = true;
+        }
 
-    //    if (col.tag == "Girl")
-    //    {
-    //        activated = true;
-    //    }
-    //}
+        if (col.tag == "Girl")
+        {
+            activated = true;
+        }
+    }
 
-    //void OnTriggerExit2D(Collider2D col)
-    //{
-    //    if (col.tag == "Boy")
-    //    {
-    //        girlClose = false;
-    //        attachManager.ableTo = true;
-    //    }
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == "Boy")
+        {
+            boyClose = false;
+        }
 
-    //    if (col.tag == "Girl")
-    //    {
-    //        activated = true;
-    //    }
-    //}
+   
+    }
 
 
 }

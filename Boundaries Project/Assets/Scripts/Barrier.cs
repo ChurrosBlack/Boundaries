@@ -5,7 +5,7 @@ public class Barrier : MonoBehaviour
 {
     bool open;
     [SerializeField]
-    int powerToOpen = 1;
+    int powerToOpen = 1; //Quantos botões necessários para abrir a porta
     public int actualPower;
     //Às vezes uma barreira necessita de mais de um portão para abrir
 
@@ -20,7 +20,7 @@ public class Barrier : MonoBehaviour
 
     void Update()
     {
-        if (actualPower >= powerToOpen) open = true;
+        open = actualPower >= powerToOpen;
         anim.SetBool("Open", open);
     }
 }
