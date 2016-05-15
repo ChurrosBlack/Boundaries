@@ -38,6 +38,14 @@ public class Button : MonoBehaviour
         }
     }
 
+    void ActivateObjectsAttached()
+    {
+        for (int i = 0; i < objAttachedTo.Length; i++)
+        {
+            objAttachedTo[i].GetComponent<Barrier>().actualPower++;
+        }
+    }
+
     //void OnTriggerEnter2D(Collider2D col)
     //{
 
@@ -67,12 +75,6 @@ public class Button : MonoBehaviour
     //    }
     //}
 
-    //void ActivateObjectsAttached()
-    //{
-    //    for (int i = 0; i < objAttachedTo.Length; i++)
-    //    {
-    //        objAttachedTo[i].GetComponent<Barrier>().open = true;
-    //    }
-    //}
+
 }
 
