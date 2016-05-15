@@ -12,6 +12,7 @@ public class Button : MonoBehaviour
     bool boyClose;
     [SerializeField]
     bool activated = false;
+    [SerializeField]
     Transform[] objAttachedTo; //Porta ou barreira atrelado ao botão para ser ativado
 
     void Start()
