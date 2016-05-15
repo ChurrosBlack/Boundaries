@@ -33,6 +33,17 @@ public class WindBlow : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D col)
     {
+        try
+        {
+            if (col.gameObject.GetComponent<LadderController>().onLadder)
+                return;
+        }
+        catch (System.Exception)
+        {
+            
+            throw;
+        }
+
         col.gameObject.GetComponent<Rigidbody2D>().AddForce(force * windForce);
     }
 

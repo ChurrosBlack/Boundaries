@@ -38,34 +38,34 @@ public class Button : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
+    //void OnTriggerEnter2D(Collider2D col)
+    //{
 
-        if (col.tag == "Boy")
-        {
-            attachManager.ableTo = false;
-            girlClose = true;
-        }
+    //    if (col.tag == "Boy")
+    //    {
+    //        attachManager.ableTo = false;
+    //        girlClose = true;
+    //    }
 
-        if (col.tag == "Girl")
-        {
-            activated = true;
-        }
-    }
+    //    if (col.tag == "Girl")
+    //    {
+    //        activated = true;
+    //    }
+    //}
 
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.tag == "Boy")
-        {
-            girlClose = false;
-            attachManager.ableTo = true;
-        }
+    //void OnTriggerExit2D(Collider2D col)
+    //{
+    //    if (col.tag == "Boy")
+    //    {
+    //        girlClose = false;
+    //        attachManager.ableTo = true;
+    //    }
 
-        if (col.tag == "Girl")
-        {
-            activated = true;
-        }
-    }
+    //    if (col.tag == "Girl")
+    //    {
+    //        activated = true;
+    //    }
+    //}
 
     //void ActivateObjectsAttached()
     //{
