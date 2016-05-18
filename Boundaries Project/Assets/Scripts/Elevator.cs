@@ -23,7 +23,8 @@ public class Elevator : MonoBehaviour
 
     void Update()
     {
-        if (actualPower >= powerToTurnOn && girlOn)
+        if (actualPower >= powerToTurnOn ) 
+            //&& girlOn
         {
             Move();
         }
@@ -61,7 +62,7 @@ public class Elevator : MonoBehaviour
                 break;
         }
 
-        print(Vector2.Distance(transform.position, endPosition.position));
+
         if (Vector2.Distance(transform.position, endPosition.position) <= 0.3)
         {
             endPosition.position = startPos;

@@ -49,6 +49,7 @@ public class CheckPoint : MonoBehaviour
         attachManager.boyJoint.gameObject.transform.position = checkPoint;
         attachManager.boyJoint.enabled = true;
         boyTransform.GetComponent<LadderController>().onArea = boyWasOnLadderArea;
+        boyTransform.GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
 
     public void ReturnToCheckPointSeparated()
@@ -57,5 +58,6 @@ public class CheckPoint : MonoBehaviour
         boyTransform.position = checkPointBoyPosition;
         girlTransform.position = checkPointGirlPosition;
         boyTransform.GetComponent<LadderController>().onArea = boyWasOnLadderArea;
+        boyTransform.GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
 }

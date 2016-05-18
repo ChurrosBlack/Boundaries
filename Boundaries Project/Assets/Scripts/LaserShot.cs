@@ -41,11 +41,10 @@ public class LaserShot : MonoBehaviour
 
     void Shoot()
     {
-        print("shot");
+
         Debug.DrawRay(transform.position, transform.up * shotDistance, Color.yellow);
         if (Physics2D.Raycast(transform.position, transform.up, shotDistance, playerLayer))
         {
-            print("Cant go bro, look at that drop right there nigguh");
             gameOverManager.boyDead = true;
             gameOverManager.girlDead = true;
         }

@@ -8,13 +8,14 @@ public class Inventory : MonoBehaviour
     /// Cria lista de inventário para garota
     /// </summary>
     [SerializeField]
-    List<Item> inventory = new List<Item>();
+    public List<Item> inventory = new List<Item>();
     
     CheckPoint checkpointSave;
 
     void Start()
     {
         checkpointSave = GetComponent<CheckPoint>();
+        print(inventory.Count + "inv");
     }
 
     public void AddItem(Item i)
