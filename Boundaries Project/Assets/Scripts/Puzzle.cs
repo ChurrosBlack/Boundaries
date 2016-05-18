@@ -16,10 +16,17 @@ public class Puzzle : MonoBehaviour
         {
             return;
         }
-        else
+
+        print("Buttons: " + CheckButtonsActivated() + "Barriers " + CheckButtonsActivated());
+
+        if (CheckButtonsActivated())
         {
-            ResetAll();
+            if (!CheckBarriersOpened())
+            {
+                ResetAll();
+            }
         }
+       
     }
 
     bool CheckButtonsActivated()
@@ -49,6 +56,7 @@ public class Puzzle : MonoBehaviour
 
     void ResetAll()
     {
+        print("Called reset all");
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].activated = false;
@@ -56,10 +64,17 @@ public class Puzzle : MonoBehaviour
 
         for (int i = 0; i < barriers.Length; i++)
         {
-            barriers[i].open = false;
+            barriers[i].actualPower = 0;
         }
     }
 
+    void Finish()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].OnPuzzle = false;
+        }
+    }
 
 }
 

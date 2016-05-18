@@ -99,6 +99,7 @@ public class Button : MonoBehaviour
 
         if (col.tag == "Girl")
         {
+            print("Girl detec");
             activated = true;
             ActivateObjectsAttached();
         }
