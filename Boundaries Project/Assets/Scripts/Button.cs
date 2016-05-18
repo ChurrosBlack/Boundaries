@@ -43,7 +43,19 @@ public class Button : MonoBehaviour
     {
         for (int i = 0; i < objAttachedTo.Length; i++)
         {
-            objAttachedTo[i].GetComponent<Barrier>().actualPower++;
+            switch (objAttachedTo[i].tag)
+            {
+                case "Barrier":
+                    objAttachedTo[i].GetComponent<Barrier>().actualPower++;
+                    break;
+                case "Elevator":
+                    objAttachedTo[i].GetComponent<Elevator>().actualPower++;
+                    break;
+                case "Platform":
+                    objAttachedTo[i].GetComponent<Plataform>().actualPower++;
+                    break;
+            }
+
         }
     }
 

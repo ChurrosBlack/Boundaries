@@ -14,6 +14,8 @@ public class CheckPoint : MonoBehaviour
     public Transform girlTransform;
     public bool together;
 
+    bool boyWasOnLadderArea;
+
     public void Start()
     {
         attachManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<AttachManager>();
@@ -22,8 +24,7 @@ public class CheckPoint : MonoBehaviour
 
     public void SaveCheckPoint()
     {
-        //Se eles estavam juntos quando o checkpoint for salvo
-        
+        //Se eles estavam juntos quando o checkpoint for salvo        
 
         
         if (attachManager.attached)
@@ -36,6 +37,8 @@ public class CheckPoint : MonoBehaviour
             checkPointGirlPosition = girlTransform.position;
             checkPointBoyPosition = boyTransform.position;
         }
+
+        boyWasOnLadderArea = boyTransform.GetComponent<LadderController>().onArea;
     }
 
     public void ReturnToCheckPointTogether()
@@ -45,6 +48,7 @@ public class CheckPoint : MonoBehaviour
         girlTransform.position = checkPoint;
         attachManager.boyJoint.gameObject.transform.position = checkPoint;
         attachManager.boyJoint.enabled = true;
+        boyTransform.GetComponent<LadderController>().onArea = boyWasOnLadderArea;
     }
 
     public void ReturnToCheckPointSeparated()
@@ -52,5 +56,6 @@ public class CheckPoint : MonoBehaviour
         print("Entered ReturnToCheckPointSeparated");
         boyTransform.position = checkPointBoyPosition;
         girlTransform.position = checkPointGirlPosition;
+        boyTransform.GetComponent<LadderController>().onArea = boyWasOnLadderArea;
     }
 }

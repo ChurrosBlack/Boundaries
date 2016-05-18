@@ -13,6 +13,7 @@ public class LadderController : MonoBehaviour
     public bool onArea;
     float gravityScale;
     Rigidbody2D rb;
+    GameOverManager gameOverManager;
     // Use this for initialization
     void Start()
     {
@@ -20,11 +21,14 @@ public class LadderController : MonoBehaviour
         rb = playerController.transform.GetComponent<Rigidbody2D>();
         speed = playerController.speed;
         gravityScale = playerController.transform.GetComponent<Rigidbody2D>().gravityScale;
+        gameOverManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameOverManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+       
+
         if (onArea && Input.GetKeyDown(KeyCode.Q))
         {
             onLadder = true;

@@ -12,7 +12,6 @@ public class Plataform : MonoBehaviour
     */
 
 
-    bool isOverPlataform = false; //Váriavel de controle de player("Girl") para verificar se a mesma está sobre a plataforma.
     
     public Vector2 Velocity = new Vector2(1, 0);
 
@@ -28,6 +27,9 @@ public class Plataform : MonoBehaviour
     public Vector2 _centre;
     private float _angle;
 
+    public float actualPower;
+    public float powerToTurnOn = 1;
+
     private void Start()
     {
         _centre = transform.position;
@@ -39,6 +41,8 @@ public class Plataform : MonoBehaviour
 
             //_centre += Velocity * Time.deltaTime;
 
+        if (actualPower >= powerToTurnOn)
+        {
             _angle += (Clockwise ? RotateSpeed : -RotateSpeed) * Time.deltaTime;
 
             var x = Mathf.Sin(_angle) * RotateRadiusX;
@@ -47,6 +51,7 @@ public class Plataform : MonoBehaviour
             transform.position = _centre + new Vector2(x, y);
 
            
+        }
         
         
     }
@@ -58,14 +63,14 @@ public class Plataform : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (collider.gameObject.name == "Girl")
+        if (col.tag == "Girl")
         {
-            isOverPlataform = true;
+           
             Debug.Log("Plataform");
-
-
+            col.transform.SetParent(transform);
         }
     }
+
 }

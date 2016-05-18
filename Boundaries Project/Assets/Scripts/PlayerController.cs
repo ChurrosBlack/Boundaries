@@ -6,8 +6,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 5;
     public Direction dir;
     public KeyCode pauseButton;
+    public KeyCode interactButton;
     Rigidbody2D rb;
-
+    public float verticalInput;
+    public float horizontalInput;
+    bool interact;
 
     /// <summary>
     /// Componente responsável pelos controles, tanto o garoto quanto a menina levam o componente
@@ -21,14 +24,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float input = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        interact = Input.GetKey(interactButton);
 
-        if (input > 0)
+        if (horizontalInput > 0)
         {
             MoveRight();
         }
 
-        if (input < 0)
+        if (horizontalInput < 0)
         {
             MoveLeft();
         }
