@@ -32,7 +32,7 @@ public class Plataform : MonoBehaviour
 
     private void Start()
     {
-        _centre = transform.position;
+        //_centre = transform.position;
     }
 
     private void FixedUpdate()
@@ -69,6 +69,14 @@ public class Plataform : MonoBehaviour
         {
            
             Debug.Log("Plataform");
+            col.transform.SetParent(transform);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == "Girl")
+        {
             col.transform.SetParent(transform);
         }
     }

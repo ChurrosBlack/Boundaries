@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Barrier : MonoBehaviour
 {
-    bool open;
+    public bool open;
     [SerializeField]
     public int powerToOpen = 1; //Quantos botões necessários para abrir a porta
     public int actualPower;
@@ -17,5 +17,7 @@ public class Barrier : MonoBehaviour
     void Update()
     {
         open = actualPower >= powerToOpen;
+        GetComponent<BoxCollider2D>().isTrigger = open;
+        
     }
 }

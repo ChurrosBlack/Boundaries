@@ -7,13 +7,14 @@ public class Button : MonoBehaviour
     /// Script de comportamento de botão
     /// Pode ser usado também para alavancas, etc
     /// </summary>
-   
+
     AttachManager attachManager; //Necessita ter referência à este componente poiso botão de interação é o mesmo
     bool boyClose;
     [SerializeField]
-    bool activated = false;
+    public bool activated = false;
     [SerializeField]
     Transform[] objAttachedTo; //Porta ou barreira atrelado ao botão para ser ativado
+    public bool OnPuzzle;
 
     void Start()
     {
@@ -28,8 +29,9 @@ public class Button : MonoBehaviour
             print("detected");
             try
             {
-                print("Button" + gameObject.name + " :" +activated);
+                print("Button" + gameObject.name + " :" + activated);
                 activated = true;
+                ActivateObjectsAttached();
             }
             catch (System.Exception)
             {
@@ -37,27 +39,55 @@ public class Button : MonoBehaviour
                 throw;
             }
         }
+
+        ////Remover após testes
+        //if (activated)
+        //{
+        //    ActivateObjectsAttached();
+        //    activated = false;
+        //}
     }
 
     void ActivateObjectsAttached()
     {
-        for (int i = 0; i < objAttachedTo.Length; i++)
+        if (!OnPuzzle)
         {
-            switch (objAttachedTo[i].tag)
+            for (int i = 0; i < objAttachedTo.Length; i++)
             {
-                case "Barrier":
-                    objAttachedTo[i].GetComponent<Barrier>().actualPower++;
-                    break;
-                case "Elevator":
-                    objAttachedTo[i].GetComponent<Elevator>().actualPower++;
-                    break;
-                case "Platform":
-                    objAttachedTo[i].GetComponent<Plataform>().actualPower++;
-                    break;
+                switch (objAttachedTo[i].tag)
+                {
+                    case "Barrier":
+                        objAttachedTo[i].GetComponent<Barrier>().actualPower++;
+                        break;
+                    case "Elevator":
+                        objAttachedTo[i].GetComponent<Elevator>().actualPower++;
+                        break;
+                    case "Platform":
+                        objAttachedTo[i].GetComponent<Plataform>().actualPower++;
+                        break;
+                }
             }
-
         }
+        else
+        {
+            for (int i = 0; i < objAttachedTo.Length; i++)
+            {
+                if (objAttachedTo[i].GetComponent<Barrier>().actualPower >= objAttachedTo[i].GetComponent<Barrier>().powerToOpen)
+                {
+                    objAttachedTo[i].GetComponent<Barrier>().actualPower--;
+                }
+                else
+                {
+                    objAttachedTo[i].GetComponent<Barrier>().actualPower++;
+                }
+            }
+        }
+
+
     }
+
+
+
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -70,6 +100,7 @@ public class Button : MonoBehaviour
         if (col.tag == "Girl")
         {
             activated = true;
+            ActivateObjectsAttached();
         }
     }
 
@@ -80,7 +111,7 @@ public class Button : MonoBehaviour
             boyClose = false;
         }
 
-   
+
     }
 
 

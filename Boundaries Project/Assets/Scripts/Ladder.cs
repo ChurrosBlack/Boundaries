@@ -16,7 +16,7 @@ public class Ladder : MonoBehaviour
         attachManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<AttachManager>();
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         if (col.tag == "Boy")
         {
@@ -25,12 +25,25 @@ public class Ladder : MonoBehaviour
                 ladderController.onArea = false;
                 return;
             }
-            print("On LAdder Area");
-            ladderController.onArea = !ladderController.onArea;
-            EdgeCollider2D edge = new EdgeCollider2D();
 
+            print("On LAdder Area");
+            ladderController.onArea = true;
         }
         
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == "Boy")
+        {
+             if(attachManager.attached)
+            {
+                ladderController.onArea = false;
+                return;
+            }
+
+             ladderController.onArea = false;
+        }
     }
 
     
