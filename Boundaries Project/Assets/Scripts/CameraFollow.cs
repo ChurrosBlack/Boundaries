@@ -9,14 +9,18 @@ public class CameraFollow : MonoBehaviour
 
     public Transform[] targets = new Transform[2];
     public Vector2 midTarget; //Posição do ponto exato de metade da distância entre os dois corpos
+    public float zDistance;
+
     public float distance;
+    public float maxDistance; //Distância máxima entre os corpos em que a câmera deixa de comportar ambos na câmera
     public float delay; //Pequeno atraso no movimento da câmera para torná-lo mais fluido e suave
     public float xTarget; //Deslocamento em x
     public float yTarget; //Deslocamento em y
     public int targetIndex; //Caso estejam soltos um do outro a câmera precisa levar em consideração o alvo que está sendo controlado, no caso, o garoto
 
     Camera cam;
-    float defaultOrthoSize = 4.52f; 
+    float defaultOrthoSize = 4.52f;
+    public float orthoOff;
 
     PlayerController[] player = new PlayerController[2];
     int side; //Variável para controle de que lado o jogador está olhando, podendo ser 1 ou -1 (Direita ou esquerda)
@@ -33,11 +37,11 @@ public class CameraFollow : MonoBehaviour
 
         if (player[1].GetComponent<HingeJoint2D>().enabled)
         {
-            targetIndex = 0;
+            targetIndex = 0; //Garota
         }
         else
         {
-            targetIndex = 1;
+            targetIndex = 1; //Menino
         }
 
         if (delay < 0)
@@ -45,21 +49,30 @@ public class CameraFollow : MonoBehaviour
             delay = 0;
         }
 
-        midTarget = new Vector2((targets[0].position.x + targets[1].position.x)/2, (targets[0].position.y + targets[1].position.y)/2);
+        distance = Vector2.Distance(player[0].transform.position, player[1].transform.position);
 
-
-
-        transform.position = new Vector3(Mathf.Lerp(transform.position.x, midTarget.x + (xTarget * side) , delay),
-            Mathf.Lerp(transform.position.y, midTarget.y + yTarget , delay),
-            distance
-            );
-        AdjustCameraSize();
+        if (distance <= maxDistance)
+        {
+            midTarget = new Vector2((targets[0].position.x + targets[1].position.x) / 2, (targets[0].position.y + targets[1].position.y) / 2);
+            transform.position = new Vector3(Mathf.Lerp(transform.position.x, midTarget.x + (xTarget * side), delay),
+                Mathf.Lerp(transform.position.y, midTarget.y + yTarget, delay),
+                zDistance
+                );
+            AdjustCameraSize(); 
+        }
+        else
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, defaultOrthoSize, delay);
+            transform.position = new Vector3(Mathf.Lerp(transform.position.x, player[1].transform.position.x + (xTarget * side), delay),
+               Mathf.Lerp(transform.position.y, player[1].transform.position.y + yTarget, delay),
+               zDistance
+               );
+        }
     }
 
     void AdjustCameraSize()
     {
-        cam.orthographicSize = Vector2.Distance(targets[0].position, targets[1].position)/2;
+        cam.orthographicSize = Vector2.Distance(targets[0].position, targets[1].position)/2 + orthoOff;
         if (cam.orthographicSize <= defaultOrthoSize) cam.orthographicSize = defaultOrthoSize;
-
     }
 }

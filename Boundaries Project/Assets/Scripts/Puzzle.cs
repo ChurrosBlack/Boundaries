@@ -72,7 +72,7 @@ public class Puzzle : MonoBehaviour
     {
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i].OnPuzzle = false;
+            buttons[i].OnBarrierPuzzle = false;
         }
     }
 

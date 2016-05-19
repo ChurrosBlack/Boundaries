@@ -5,8 +5,8 @@ public class WallDoor : MonoBehaviour
 {
     LadderController ladderController;
     SpriteRenderer boySprite;
-     LayerMask layerToGo;
-     LayerMask originalLayer;
+    LayerMask layerToGo;
+    LayerMask originalLayer;
     public PolygonCollider2D ladderLinked;
     public bool front = true;
     public bool onDoorArea;

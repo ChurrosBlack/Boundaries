@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5;
+    [HideInInspector]
+    public float auxSpeed;
     public Direction dir;
     public KeyCode pauseButton;
     public KeyCode interactButton;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        auxSpeed = speed;
     }
 
     void Update()

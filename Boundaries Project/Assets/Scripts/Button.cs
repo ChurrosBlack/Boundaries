@@ -14,7 +14,7 @@ public class Button : MonoBehaviour
     public bool activated = false;
     [SerializeField]
     Transform[] objAttachedTo; //Porta ou barreira atrelado ao botão para ser ativado
-    public bool OnPuzzle;
+    public bool OnBarrierPuzzle;
 
     void Start()
     {
@@ -50,7 +50,7 @@ public class Button : MonoBehaviour
 
     void ActivateObjectsAttached()
     {
-        if (!OnPuzzle)
+        if (!OnBarrierPuzzle)
         {
             for (int i = 0; i < objAttachedTo.Length; i++)
             {

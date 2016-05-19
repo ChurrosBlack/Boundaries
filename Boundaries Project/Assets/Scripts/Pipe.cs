@@ -10,7 +10,7 @@ public class Pipe : MonoBehaviour
     /// </summary>
     public Transform exit;
     Transform boy;
-    public float time;
+    public float time = 1f;
     public bool playerExiting;
 
     void OnTriggerEnter2D(Collider2D col)
@@ -49,8 +49,8 @@ public class Pipe : MonoBehaviour
     {
         destination.GetComponent<Pipe>().playerExiting = true;
         boy.GetComponent<SpriteRenderer>().enabled = false;
-        StartCoroutine(Wait(time));
         boy.transform.position = destination.position;
+        StartCoroutine(Wait(time));
         boy.GetComponent<SpriteRenderer>().enabled = true;
     }
 
